@@ -133,7 +133,7 @@ def get_user_info(username: str):
             response.raise_for_status()
             return response.json()
         except Exception as e2:
-            error_exit(f"Erro ao obter informações: {str(e)}")
+            error_exit(f"Erro ao obter informacoes: {str(e)}")
 
 def get_user_posts(user_id, max_posts=100):
     all_posts = []
@@ -206,7 +206,7 @@ def process_user_info(user_info):
         profile_pic = user_data.get('profile_pic_url_hd', 'N/A')
         full_name = user_data.get('full_name', 'N/A')
     else:
-        error_exit("Estrutura de dados não reconhecida")
+        error_exit("Estrutura de dados nao reconhecida")
     
     return user_id, bio, followers, following, posts, verified, private, profile_pic, full_name
 
@@ -330,7 +330,7 @@ def download_user_posts(target_username, user_id, full_name):
                                     if download_media(carousel_media_url, filename, posts_dir):
                                         media_downloaded = True
                             
-                            elif carousel_media_type == 2:  # Vídeo
+                            elif carousel_media_type == 2:  # Video
                                 if 'video_versions' in carousel_item and len(carousel_item['video_versions']) > 0:
                                     carousel_media_url = carousel_item['video_versions'][0]['url']
                                 elif 'video_url' in carousel_item:
@@ -364,7 +364,7 @@ def download_user_posts(target_username, user_id, full_name):
                 if media_downloaded: 
                     print(f"{Colors.red}> {Colors.reset}Post{Colors.red} {index+1}{Colors.reset} baixado{Colors.reset}")
                 else:
-                    print(f"{Colors.red}>{Colors.reset} Post {Colors.red}{index+1} {Colors.reset}processado mas nenhuma mídia baixada{Colors.reset}")
+                    print(f"{Colors.red}>{Colors.reset} Post {Colors.red}{index+1} {Colors.reset}processado mas nenhuma midia baixada{Colors.reset}")
                 
                 time.sleep(args.delay)
                 
@@ -479,12 +479,12 @@ def main():
                 if download_user_posts(args.target, user_id_target, full_name_target):
                     print(f"{Colors.red}>{Colors.reset} Posts baixados com sucesso{Colors.reset}")
 
-                print(f"{Colors.red}> {Colors.reset}Clone do perfil{Colors.red} {args.target}{Colors.reset} concluído!{Colors.reset}")
+                print(f"{Colors.red}> {Colors.reset}Clone do perfil{Colors.red} {args.target}{Colors.reset} concluido!{Colors.reset}")
                 print(f"{Colors.red}> {Colors.reset}Todos os arquivos salvos na pasta: {Colors.red}{args.target}/{Colors.reset}")
             else:
-                error_exit(f"[ {Colors.red}ERROR {Colors.reset}] Falha ao obter informações do usuário alvo")
+                error_exit(f"[ {Colors.red}ERROR {Colors.reset}] Falha ao obter informacoes do usuario alvo")
         else:
-            error_exit(f"[ {Colors.red}ERROR {Colors.reset}] Falha na autenticação. Verifique suas credenciais.")
+            error_exit(f"[ {Colors.red}ERROR {Colors.reset}] Falha na autenticacao. Verifique suas credenciais.")
     else:
         error_exit(f"Erro HTTP {response.status_code}")
 
